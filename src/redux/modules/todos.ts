@@ -1,4 +1,5 @@
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+import { v4 as uuidv4 } from "uuid";
+import { TodosType } from "../../type"
 
 // Action Value
 const ADD_TODO = "ADD_TODO";
@@ -7,28 +8,28 @@ const CHANGE_DONE_TODO = "CHANGE_DONE_TODO"
 const EDIT_TODO = "EDIT_TODO"
 
 // Action Creator
-export const addTodo = (payload) => {
+export const addTodo = (payload: TodosType) => {
     return {
         type: ADD_TODO,
         payload,
     }
 }
 
-export const deleteTodo = (payload) => {
+export const deleteTodo = (payload: string) => {
     return {
         type: DELETE_TODO,
         payload,
     }
 }
 
-export const changeDone = (payload) => {
+export const changeDone = (payload: string) => {
     return {
         type: CHANGE_DONE_TODO,
         payload
     }
 }
 
-export const editTodo = (payload) => {
+export const editTodo = (payload: TodosType) => {
     return {
         type: EDIT_TODO,
         payload
@@ -42,7 +43,7 @@ const initialState = [
     ]
 
 // Reducer
-const todos = (state = initialState, action) => {
+const todos = (state = initialState, action: any) => {
   // console.log("action.payload:", action.payload)
 
   switch (action.type) {

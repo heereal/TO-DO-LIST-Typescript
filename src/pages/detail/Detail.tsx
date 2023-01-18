@@ -2,18 +2,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { deleteTodo, changeDone } from "../../redux/modules/todos";
 import { StDetail, DetailBox, MoveBtn, BtnBox, DetailTextBox, ID, Title, Content, Btn } from "./styled";
+import { RootState } from "../../index";
+import { TodosType } from "../../type"
 
 function Detail()  {
 
-    const todos = useSelector((state) => state.todos);
+    const todos = useSelector((state: RootState) => state.todos);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const param = useParams();
 
-    const todo = todos.find((list) => list.id === param.id);
+    const todo = todos.find((list: TodosType) => list.id === param.id);
 
     // [삭제] 버튼 눌렀을 때 실행됨
-    const deleteHandler = (id) => {
+    const deleteHandler = (id: string) => {
         if ( window.confirm("정말 삭제하시겠습니까?") ) {
             navigate("/")
             dispatch(deleteTodo(id))
@@ -21,7 +23,7 @@ function Detail()  {
     }
 
     // [완료] 또는 [취소] 버튼 눌렀을 때 실행됨
-    const changeDoneHandler = (id) => {
+    const changeDoneHandler = (id: string) => {
         dispatch(changeDone(id))   
       }
 
@@ -30,7 +32,7 @@ function Detail()  {
             <DetailBox>
                 <BtnBox>
                     <Link to={"/"}>
-                        <MoveBtn backgroundColor={"#8EC3B0"} >
+                        <MoveBtn>
                             <span>이전으로</span>
                         </MoveBtn>
                     </Link>

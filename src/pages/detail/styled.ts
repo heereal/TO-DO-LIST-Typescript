@@ -76,7 +76,7 @@ const Content = styled.p`
     margin: 15px 0 30px 0;
 `
 
-const Btn = styled.button`
+const Btn = styled.button<{backgroundColor: string}>`
     margin-right: 12px;
     height: 35px;
     width: 100px;

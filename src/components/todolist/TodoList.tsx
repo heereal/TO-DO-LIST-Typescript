@@ -2,32 +2,36 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteTodo, changeDone } from "../../redux/modules/todos";
 import { List, ListContainer, ListCard, Detail, ListText, TodoTitle, TodoContent, TodoBtns, Btn } from "./styled"
+import { RootState } from "../../index";
+import { TodosType } from "../../type"
 
-function TodoList ({isDone}) {
+interface IsDone { isDone: boolean }
+
+function TodoList ({isDone}: IsDone) {
     
-    const todos = useSelector((state) => state.todos);
+    const todos = useSelector((state: RootState) => state.todos);
     const dispatch = useDispatch();
 
     // [삭제] 버튼 눌렀을 때 실행됨
-    const deleteHandler = (id) => {
+    const deleteHandler = (id: string) => {
         if ( window.confirm("정말 삭제하시겠습니까?") ) {
             dispatch(deleteTodo(id))
         }
     }
 
     // [완료] 또는 [취소] 버튼 눌렀을 때 실행됨
-    const changeDoneHandler = (id) => {
+    const changeDoneHandler = (id: string) => {
         dispatch(changeDone(id))   
     }
-   
+
     return (
         <List>
             {/* 제목 변경-isDone이 false면 Working, true면 Done */}
             <h2>{ isDone ? "Done..! 🎉" : "Working.. 🔥"}</h2>
             <ListContainer>
                 {/* isDone 값 true/false에 따라 리스트를 필터링함 */}
-                {todos.filter((list) => list.isDone === isDone)
-                .map((list) => {
+                {todos.filter((list: TodosType) => list.isDone === isDone)
+                .map((list: TodosType) => {
                     return (
                             // isDone 값에 따라 [취소] 또는 [완료]로 버튼이 변경됨
                             <ListCard key={list.id}>

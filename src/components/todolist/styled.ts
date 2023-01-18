@@ -99,7 +99,7 @@ const TodoBtns = styled.div`
     justify-content: center;
 `
 
-const Btn = styled.button`
+const Btn = styled.button<{backgroundColor: string}>`
     margin-right: 12px;
     height: 35px;
     width: 100px;

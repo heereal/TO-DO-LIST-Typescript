@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { editTodo } from "../../redux/modules/todos";
 import { StDetail, DetailBox, BtnBox, MoveBtn, DetailTextBox, ID, EditForm, TitleInput, ContentInput, Btn } from "./styled";
+import { RootState } from "../../index";
+import { TodosType } from "../../type"
 
 const Edit = () => {
 
-    const todos = useSelector((state) => state.todos);
+    const todos = useSelector((state: RootState) => state.todos);
     const dispatch = useDispatch();
     const param = useParams();
 
-    const todo = todos.find((list) => list.id === param.id);
+    const todo = todos.find((list: TodosType) => list.id === param.id);
     const navigate = useNavigate();
 
     // useState에 todo.title과 todo.content를 넣어서
@@ -19,7 +21,7 @@ const Edit = () => {
     const [content, setContent] = useState(todo.content);
 
     // input 창에 제목과 내용을 입력했을 때 입력값 가져오기
-    const inputContent = (e) => {
+    const inputContent = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name === 'title') {
           setTitle(e.target.value)
         } else if (e.target.name === 'content') {
@@ -55,8 +57,8 @@ const Edit = () => {
                     <EditForm>
                         {/* value에 title과 content의 useState(초기값)이 들어온다 */}
                         {/* autoFoucs로 컴포넌트가 렌더링될 때 title input창에 자동으로 포커스하기 */}
-                        <TitleInput id="title" value={title} name='title' method="post" onChange={inputContent} autoFocus />
-                        <ContentInput id="coneent" value={content} name='content' type="text" method="post" onChange={inputContent} />
+                        <TitleInput id="title" value={title} name='title' onChange={inputContent} autoFocus />
+                        <ContentInput id="coneent" value={content} name='content' type="text" onChange={inputContent} />
                     </EditForm>
                     <Btn backgroundColor={"#8EC3B0"} 
                     onClick={editHandler}>수정하기</Btn>

@@ -100,7 +100,7 @@ const ContentInput = styled.input`
     }
 `
 
-const Btn = styled.button`
+const Btn = styled.button<{backgroundColor: string}>`
     margin-right: 12px;
     height: 35px;
     width: 120px;
